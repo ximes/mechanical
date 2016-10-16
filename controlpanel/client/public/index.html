@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <title></title>
+ <script src="js/processing.min.js"></script>
+ </head>
+ <body>	
+	<canvas id="sensors" data-processing-sources="./sensors.pde"></canvas>
+	<script type="text/javascript">
+		var socket = new WebSocket("ws://localhost:8081");
+
+		socket.onopen = openSocket;
+		socket.onmessage = showData;
+		var sensors = [];
+
+		function openSocket() {
+			socket.send("Hello");
+			for(var i = 0; i < 11; i++) {
+			    sensors.push(0);
+			}
+		}
+
+		function showData(result) {
+			console.log('.');
+			if (result.data){
+				results = JSON.parse(result.data);
+				results.forEach(function(arg, index){
+					sensors[index] = arg.value;
+				});
+			}
+		}
+	</script> 
+ </body>
+</html>
