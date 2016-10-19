@@ -15,7 +15,7 @@ app.ws('/', function(ws, req) {
 });
 
 var port = new serialport("/dev/cu.usbmodem1411", {
-  baudRate: 57600,
+  baudRate: 9600,
   parser: serialport.parsers.readline('--')
 });
 

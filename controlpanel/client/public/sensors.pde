@@ -59,11 +59,8 @@ void draw(){
 }
 
 String drawLed(index, x,y){
-	if (sensors[index] == 1){
-		fill(255,0,0);
-	} else {
-		fill(255,255,255);
-	}
+	c_alpha = (255 * sensors[index] / 1024);
+	fill(255,0,0, c_alpha);
 	stroke(0);
 	ellipse(x, y, led_radius, led_radius);
 
